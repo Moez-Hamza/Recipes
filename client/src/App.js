@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Recipe from './components/recipe';
 import Add from './components/Add'
+import Search from './components/Search';
+import axios from 'axios'
 
 class App extends React.Component {
   constructor(props){
@@ -10,9 +12,14 @@ class App extends React.Component {
       recipe:[],
       view:'allRecipes'
     }
-    this.renderView = this.renderView.bind(this)
-    this.handleview = this.handleview.bind(this)
+    this.renderView = this.renderView.bind(this);
+    this.handleview = this.handleview.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+
+
+
    componentDidMount(){
     fetch("http://localhost:5000/api").then(response =>
       response.json()
@@ -22,6 +29,22 @@ class App extends React.Component {
       })
       })
   }
+
+
+
+  handleSubmit(input){
+    input.preventDefault()
+      axios.post("http://localhost:5000/api",{
+        name: input.target.name.value,
+        recipe: input.target.recipe.value,
+        image: input.target.image.value
+      }).then(data =>{
+        console.log(data)
+      })
+  }
+
+
+
   handleview(view){
     this.setState({
       view: view
@@ -31,7 +54,7 @@ class App extends React.Component {
     if(this.state.view === 'allRecipes'){
      return <Recipe recipes = {this.state.recipe} />
     }else if(this.state.view ==='add'){
-      return  <Add /> 
+      return  <Add handleSubmit={this.handleSubmit} /> 
     }
   }
 
@@ -58,7 +81,7 @@ class App extends React.Component {
           <div className={
             this.state.view !=='search' ?
             "nav-unselected" : "nav-selected"
-          }>Search</div>
+          }><Search onSearch ={()=>{console.log('hey')}}/></div>
         </nav>
           {this.renderView()}
       </div>

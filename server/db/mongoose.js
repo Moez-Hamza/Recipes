@@ -18,10 +18,19 @@ let recipeSchema = mongoose.Schema({
 let Recipe = mongoose.model('Recipe', recipeSchema)
  
 
-let save = (data) =>{
+let saveRecipe = (data) =>{
     let recipe = new Recipe({
-        name:data.label,
+        name:data.name,
         image_url:data.image,
-        ingredients:data.ingredients
+        ingredients:data.recipe
     })
+    let query = recipe.save((error)=>{
+        if(error){
+            console.log(error)
+        }
+
+    })
+    return query
 }
+
+module.exports.saveRecipe = saveRecipe

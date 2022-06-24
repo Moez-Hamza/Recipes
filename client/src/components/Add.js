@@ -9,7 +9,6 @@ class Add extends React.Component{
             image:''
         }
        this.handleChange = this.handleChange.bind(this)
-       this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleChange(event) {
         this.setState({
@@ -17,15 +16,11 @@ class Add extends React.Component{
         })
     }
 
-    handleSubmit(event) {
-        console.log('A name was submitted: ' + this.state.value);
-        event.preventDefault();
-      }
     render(){
         return(
         <div>
             <h2>Add a recipe</h2>
-            <form className="New-Recipe-Form" onSubmit={this.handleSubmit}>
+            <form className="New-Recipe-Form" onSubmit={this.props.handleSubmit}>
                 <label >Recipe name:
                 <input type="text" name="name" value={this.state.name} onChange={this.handleChange} /><br></br>
                 </label><br></br>
