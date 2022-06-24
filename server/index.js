@@ -18,11 +18,16 @@ app.post('/api',(req,res)=>{
 })
 
 app.post('/api/d',(req,res)=>{
-    mongoo.deleteRecipe(req.body.name)
+    mongoo.deleteRecipe(req.body.name).then(data=>{res.send(data)})
+})
+
+app.post('/api/search',(req,res)=>{
+    mongoo.searchRecipe(req.body).then(data=>{
+        res.send(data)
+    })
 })
 
 app.get("/api",(req,res)=>{
-
         mongoo.getAllRecipes().then(data =>{
             res.send(data)
         })

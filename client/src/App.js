@@ -18,8 +18,9 @@ class App extends React.Component {
     this.renderView = this.renderView.bind(this);
     this.handleview = this.handleview.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.selectOne = this.selectOne.bind(this)
-    this.deleteOne = this.deleteOne.bind(this)
+    this.selectOne = this.selectOne.bind(this);
+    this.deleteOne = this.deleteOne.bind(this);
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
 
@@ -37,6 +38,7 @@ class App extends React.Component {
   }
 
   
+
 selectOne(index){
   console.log("clicked")
   this.handleview("oneRecipe")
@@ -44,8 +46,20 @@ selectOne(index){
     oneRecipe:this.state.recipe[index]
   })
 }
+
 deleteOne(index){
   axios.post(("http://localhost:5000/api/d"),this.state.recipe[index])
+}
+
+
+handleSearch(term){
+  axios.post('http://localhost:5000/api/search',{name:term}).then(data =>{
+    console.log(data)
+    this.setState({
+      recipe:data
+    })
+  })
+  
 }
 
   handleSubmit(input){
@@ -102,7 +116,7 @@ deleteOne(index){
           <div className={
             this.state.view !=='search' ?
             "nav-unselected" : "nav-selected"
-          }><Search onSearch ={()=>{console.log('hey')}}/></div>
+          }><Search onSearch ={this.handleSearch}/></div>
         </nav>
           {this.renderView()}
       </div>
