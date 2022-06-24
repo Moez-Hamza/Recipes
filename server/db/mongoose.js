@@ -32,5 +32,9 @@ let saveRecipe = (data) =>{
     })
     return query
 }
+let getAllRecipes =()=>{
+    return Recipe.find({})
+}
 
 module.exports.saveRecipe = saveRecipe
+module.exports.getAllRecipes = getAllRecipes

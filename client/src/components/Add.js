@@ -17,22 +17,25 @@ class Add extends React.Component{
     }
 
     render(){
-        return(
+        return(<center>
         <div>
-            <h2>Add a recipe</h2>
+            <center><h2 className="title">Add a recipe</h2></center>
+            <div className="container">
             <form className="New-Recipe-Form" onSubmit={this.props.handleSubmit}>
-                <label >Recipe name:
-                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} /><br></br>
+                <label className="text-form" >Recipe name:
+                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required /><br></br>
                 </label><br></br>
-                <label >Recipe
-                <textarea type="text" name='recipe' value={this.state.recipe} onChange={this.handleChange} /><br></br>
+                <label className="text-form">Recipe
+                <textarea type="text" name='recipe' value={this.state.recipe} onChange={this.handleChange} required /><br></br>
                 </label><br></br>
-                <label >image URL
-                <input type="text" name="image" value={this.state.image} onChange={this.handleChange} /><br></br>
+                <label  className="text-form">image URL
+                <input type="url" name="image" value={this.state.image} onChange={this.handleChange}  required/><br></br>
                 </label><br></br>
-                <input type="submit" className="btn-submit" value='Submit'/>
+                <input type="submit" className="btn-submit" value='Submit'/> 
+                <div className="success">{this.props.success}</div>
             </form>
-        </div>
+            </div>
+        </div></center>
         )
         
     }

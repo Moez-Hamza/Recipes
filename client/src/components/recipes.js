@@ -1,17 +1,17 @@
 import React from "react";
 
-const Recipe = ({recipes}) =>(
-    <div className="recipe">
+const Recipes = ({recipes}) =>(
+    <div className="recipes">
         {recipes.map((food,i)=>{
         return (   <div key ={i}>
-                <h2>{food.recipe.label}</h2>
-                <img alt="" src={food.recipe.image}></img>
+                <h2 className="recipe-name">{food.name}</h2>
+                <img className="image" alt="" src={food.image_url} onClick={food.renderOne}></img>
                 <div>
-                <ol className="list">
+                {/* <ol className="list">
                     {food.recipe.ingredientLines.map((ingredient,i)=>{
                         return(<li key ={i}>{ingredient}</li>)
        
-                })}</ol>
+                })}</ol> */}
                 </div>
             </div>
             )
@@ -19,4 +19,4 @@ const Recipe = ({recipes}) =>(
     </div>
 )
 
-export default Recipe
+export default Recipes

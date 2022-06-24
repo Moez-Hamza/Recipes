@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Recipe from './components/recipe';
+import Recipes from './components/recipes';
 import Add from './components/Add'
 import Search from './components/Search';
 import axios from 'axios'
@@ -10,7 +10,8 @@ class App extends React.Component {
     super(props);
     this.state={
       recipe:[],
-      view:'allRecipes'
+      view:'allRecipes',
+      success:''
     }
     this.renderView = this.renderView.bind(this);
     this.handleview = this.handleview.bind(this);
@@ -39,7 +40,9 @@ class App extends React.Component {
         recipe: input.target.recipe.value,
         image: input.target.image.value
       }).then(data =>{
-        console.log(data)
+        this.setState({
+          success:'success'
+        })
       })
   }
 
@@ -52,10 +55,11 @@ class App extends React.Component {
   }
   renderView(){
     if(this.state.view === 'allRecipes'){
-     return <Recipe recipes = {this.state.recipe} />
+     return <Recipes recipes = {this.state.recipe} />
     }else if(this.state.view ==='add'){
-      return  <Add handleSubmit={this.handleSubmit} /> 
+      return  <Add handleSubmit={this.handleSubmit} success={this.state.success === "success"? "Data Saved" : ''} /> 
     }
+    
   }
 
   render(){

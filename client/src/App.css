@@ -38,28 +38,51 @@
   padding: 5px;
   color: #2c3e50;
 }
-form {
+.New-Recipe-Form {
   display: grid !important;
 }
-form input[type="text"] {
-  width: 400px;
-  font-size: 12px;
-  padding: 5px;
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  border-width: 1px;
-  margin-bottom: 1%;
+  box-sizing: border-box;
+}
+.New-Recipe-Form input[type="text"] {
+  font-family: sans-serif;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 
-form textarea {
+.text-form{
+  display:flexbox;
+  font-family: sans-serif;
+  position: inherit;
+  padding:5%
+}
+.title {
+  font-family:'Times New Roman', Times, serif
+}
+.New-Recipe-Form textarea {
+  font-family: 'Courier New', Courier, monospace;
   width: 80%;
   height: 150px;
   font-size: 12px;
   margin-top: 2px;
-  resize: none;
   border-radius: 4px;
 }
 
+.container {
+  width: 40%;
+}
 
 .navbuttons :hover {
   cursor: pointer;
@@ -72,13 +95,43 @@ form textarea {
 }
 
 .btn-submit{
-  size: 50%;
-  background-color: black;
-  border: none;
+  width: 100%;
+  background-color: #829eba;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.success{
+  font-family: "Francois One";
+  justify-content: center;
+  font-size: large;
+} 
+.image{
+  align-items: center;
+  float: left;
+  width:  250x;
+  height: 250px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.recipes{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.recipe-name{
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px rgb(71, 71, 71);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: rgb(105, 123, 168);
+  align-items: center;
+  font-size: large;
 }
