@@ -17,6 +17,10 @@ app.post('/api',(req,res)=>{
     res.send('Saved')
 })
 
+app.post('/api/d',(req,res)=>{
+    mongoo.deleteRecipe(req.body.name)
+})
+
 app.get("/api",(req,res)=>{
 
         mongoo.getAllRecipes().then(data =>{

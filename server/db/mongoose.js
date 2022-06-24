@@ -35,6 +35,12 @@ let saveRecipe = (data) =>{
 let getAllRecipes =()=>{
     return Recipe.find({})
 }
+let deleteRecipe =(data)=>{
+    Recipe.deleteOne({name:data}).then(console.log('Data Deleted')).catch(error =>{
+        console.log('Error')
+    })
+}
 
 module.exports.saveRecipe = saveRecipe
 module.exports.getAllRecipes = getAllRecipes
+module.exports.deleteRecipe =deleteRecipe

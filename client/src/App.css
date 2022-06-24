@@ -110,6 +110,7 @@ select {
   font-size: large;
 } 
 .image{
+  display: relative;
   align-items: center;
   float: left;
   width:  250x;
@@ -134,4 +135,30 @@ select {
   background: rgb(105, 123, 168);
   align-items: center;
   font-size: large;
+}
+.box {
+  display: flex;
+  box-shadow: 3px 3px 6px #383838;
+  margin : 20px;
+  background-color: white;
+  width: 800px;
+  font-size: 18px;
+  border-radius: 40px;
+}
+  
+.oneimage {
+  box-shadow:3px 3px 6px #383838 ;
+  justify-content: center;
+  align-items: center;
+  width:  500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.delete {
+  width: 40%;
+  background-color: #2b445d;
+  color: white;
+  margin: 8px 0;
+  cursor: pointer;
 }

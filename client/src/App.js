@@ -4,18 +4,22 @@ import Recipes from './components/recipes';
 import Add from './components/Add'
 import Search from './components/Search';
 import axios from 'axios'
+import OneRecipe from './components/OneRecipe';
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
       recipe:[],
+      oneRecipe:{},
       view:'allRecipes',
       success:''
     }
     this.renderView = this.renderView.bind(this);
     this.handleview = this.handleview.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.selectOne = this.selectOne.bind(this)
+    this.deleteOne = this.deleteOne.bind(this)
   }
 
 
@@ -25,13 +29,24 @@ class App extends React.Component {
     fetch("http://localhost:5000/api").then(response =>
       response.json()
     ).then(data =>{
+      console.log(data)
       this.setState({
         recipe:data
       })
       })
   }
 
-
+  
+selectOne(index){
+  console.log("clicked")
+  this.handleview("oneRecipe")
+  this.setState({
+    oneRecipe:this.state.recipe[index]
+  })
+}
+deleteOne(index){
+  axios.post(("http://localhost:5000/api/d"),this.state.recipe[index])
+}
 
   handleSubmit(input){
     input.preventDefault()
@@ -55,9 +70,11 @@ class App extends React.Component {
   }
   renderView(){
     if(this.state.view === 'allRecipes'){
-     return <Recipes recipes = {this.state.recipe} />
+     return <Recipes recipes = {this.state.recipe}  selectOne={this.selectOne} deleteOne={this.deleteOne} />
     }else if(this.state.view ==='add'){
       return  <Add handleSubmit={this.handleSubmit} success={this.state.success === "success"? "Data Saved" : ''} /> 
+    }else if(this.state.view ==='oneRecipe'){
+      return <center><OneRecipe recipe={this.state.oneRecipe}/></center>
     }
     
   }
