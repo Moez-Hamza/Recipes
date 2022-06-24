@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require ('cors')
-const fetch = require('isomorphic-fetch')
 const mongoo = require('./db/mongoose')
 
 
@@ -22,7 +21,7 @@ app.post('/api/d',(req,res)=>{
 })
 
 app.post('/api/search',(req,res)=>{
-    mongoo.searchRecipe(req.body).then(data=>{
+    mongoo.searchRecipe(req.body.name).then(data=>{
         res.send(data)
     })
 })
@@ -30,8 +29,8 @@ app.post('/api/search',(req,res)=>{
 app.get("/api",(req,res)=>{
         mongoo.getAllRecipes().then(data =>{
             res.send(data)
-        })
-       })
+    })
+})
 
 app.listen(port,()=>{
     console.log("listening on port 5000")
