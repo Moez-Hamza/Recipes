@@ -1,8 +1,13 @@
 body {
   margin: 0px;
   color: #2c3e50;
-  background-color: #ecf0f1;
+  background-image: url('https://images.creativemarket.com/0.1.0/ps/5748922/1820/1214/m1/fpnw/wm1/sfnkmyntwhalscmopx2o63ikkhzmebkuf6obfxquutrhknhekqlsnttg9siwz2vw-.jpg?1548240640&s=d5b2a4a9ccdc343fbd594f2d2b304588');
   font-size: 1.1em;
+  min-height: 500px;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 
