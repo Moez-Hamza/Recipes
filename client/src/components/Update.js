@@ -4,9 +4,10 @@ class Update extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            name:'',
-            recipe:'',
-            image:'',
+            name:this.props.name,
+            recipe:this.props.recipe,
+            image:this.props.image,
+            sort:this.props.sort
         }
        this.handleChange = this.handleChange.bind(this)
     }

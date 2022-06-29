@@ -16,7 +16,8 @@ class App extends React.Component {
       view:'allRecipes',
       success:'',
       currentID:'',
-      search:[]
+      search:[],
+      updatedI:''
     }
     this.renderView = this.renderView.bind(this);
     this.handleview = this.handleview.bind(this);
@@ -88,8 +89,10 @@ handleSearch(term){
 updateOne(index){
   this.setState({
   view:'update',
-  currentID:this.state.recipe[index]._id
+  currentID:this.state.recipe[index]._id,
+  updatedI:this.state.recipe[index]
   })
+
 
 }
 
@@ -123,7 +126,7 @@ updateOne(index){
     }else if(this.state.view ==='add'){
       return  <Add handleSubmit={this.handleSubmit} success={this.state.success === "success"? "Data Saved" : ''} /> 
     }else if(this.state.view ==='update'){
-      return <Update handleUpdate={this.handleUpdate} />
+      return <Update handleUpdate={this.handleUpdate} image={this.state.updatedI.image_url} recipe = {this.state.updatedI.ingredients} name = {this.state.updatedI.name} />
     }else if(this.state.view ==='oneRecipe'){
       return <center><OneRecipe recipe={this.state.oneRecipe}/></center>
     }else if(this.state.view ==='breakfast'){
