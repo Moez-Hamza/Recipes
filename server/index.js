@@ -21,8 +21,8 @@ app.delete('/api/:id',(req,res)=>{
     mongoo.deleteRecipe(req.params.id).then(data => {res.send(data)})
 })
 
-app.post('/api/search',(req,res)=>{
-    mongoo.searchRecipe(req.body.name).then(data=>{
+app.get('/api/:term',(req,res)=>{
+    mongoo.searchRecipe(req.params).then(data=>{
         res.send(data)
     })
 })

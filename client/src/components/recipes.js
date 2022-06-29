@@ -6,8 +6,8 @@ const Recipes = (props) =>(
         return (   <div key ={i}>
                 <h2 className="recipe-name">{food.name}</h2>
                 <center><img className="image" alt="" src={food.image_url} onClick={()=>{props.selectOne(i)}}></img></center>
-                <center><button className="delete" onClick={()=>{props.deleteOne(i)}}>Delete</button></center>
-                <center><button className="delete" onClick={()=>{props.update(i)}}>Update</button></center>
+                <center><button className="delete" onClick={()=>{props.deleteOne(i)}}>Delete</button>  <button className="delete" onClick={()=>{props.update(i)}}>Update</button></center>
+             
             </div>
           
             )

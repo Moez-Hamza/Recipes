@@ -34,7 +34,6 @@ let saveRecipe = (data) =>{
         if(error){
             throw error
         }
-        console.log(result)
 
     })
     return query
@@ -44,7 +43,8 @@ let getAllRecipes =()=>{
 }
 
 let searchRecipe =(data)=>{
-    return Recipe.find({name:data})
+    console.log(data.term)
+    return Recipe.find({name:{$regex:data.term,$options:"i"}}).exec()
 }
 let deleteRecipe =(data)=>{
     Recipe.deleteOne({_id:data}).catch(error =>{

@@ -113,8 +113,8 @@ select {
   display: relative;
   align-items: center;
   float: left;
-  width:  250x;
-  height: 250px;
+  width:  150x;
+  height: 150px;
   object-fit: cover;
   cursor: pointer;
 }

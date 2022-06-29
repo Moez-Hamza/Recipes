@@ -15,7 +15,8 @@ class App extends React.Component {
       oneRecipe:{},
       view:'allRecipes',
       success:'',
-      currentID:''
+      currentID:'',
+      search:[]
     }
     this.renderView = this.renderView.bind(this);
     this.handleview = this.handleview.bind(this);
@@ -60,10 +61,10 @@ deleteOne(index){
 
 
 handleSearch(term){
-  axios.post('http://localhost:5000/api/search',{name:term}).then(data =>{
-    console.log(data)
+  axios.get(`http://localhost:5000/api/${term}`).then(response =>{
     this.setState({
-      recipe:data
+      view:'search',
+      search:response.data
     })
   })
   
@@ -116,6 +117,8 @@ updateOne(index){
   renderView(){
     if(this.state.view === 'allRecipes'){
      return <Recipes recipes = {this.state.recipe}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} />
+    }else if (this.state.view === 'search'){
+      return <Recipes recipes = {this.state.search}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} />
     }else if(this.state.view ==='add'){
       return  <Add handleSubmit={this.handleSubmit} success={this.state.success === "success"? "Data Saved" : ''} /> 
     }else if(this.state.view ==='update'){
