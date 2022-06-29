@@ -21,8 +21,11 @@ let recipeSchema = mongoose.Schema({
     }
 })
 let Recipe = mongoose.model('Recipe', recipeSchema)
- 
 
+
+let getAllRecipes =()=>{
+    return Recipe.find({})
+}
 let saveRecipe = (data) =>{
     let recipe = new Recipe({
         name:data.name,
@@ -30,16 +33,13 @@ let saveRecipe = (data) =>{
         ingredients: data.recipe,
         sort:data.sort
     })
-    let query = recipe.save((error,result)=>{
+    recipe.save((error,result)=>{
         if(error){
             throw error
         }
 
     })
-    return query
-}
-let getAllRecipes =()=>{
-    return Recipe.find({})
+    return getAllRecipes()
 }
 
 let searchRecipe =(data)=>{

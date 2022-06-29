@@ -44,7 +44,6 @@ class App extends React.Component {
   
 
 selectOne(index){
-  console.log("clicked")
   this.handleview("oneRecipe")
   this.setState({
     oneRecipe:this.state.recipe[index]
@@ -78,6 +77,7 @@ handleSearch(term){
         image: input.target.image.value,
         sort:input.target.sort.value
       }).then(response =>{
+        console.log(response.data)
         this.setState({
           success:'success',
           recipe:response.data
@@ -114,9 +114,10 @@ updateOne(index){
     })
   }
 
+
   renderView(){
     if(this.state.view === 'allRecipes'){
-     return <Recipes recipes = {this.state.recipe}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} />
+     return <center><Recipes recipes = {this.state.recipe}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} /></center>
     }else if (this.state.view === 'search'){
       return <Recipes recipes = {this.state.search}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} />
     }else if(this.state.view ==='add'){

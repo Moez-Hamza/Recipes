@@ -111,22 +111,24 @@ select {
 } 
 .image{
   display: relative;
-  align-items: center;
-  float: left;
-  width:  150x;
-  height: 150px;
-  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  height: 160px;
   cursor: pointer;
 }
 .recipes{
-  display: flex;
+  display:flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap:wrap;
+  width: 90%;
+  /* margin: 100px; */
 }
 
 .recipe-name{
   color: white;
-  border-radius: 10px;
+  border-radius: 2px;
   box-shadow: 0px 5px 20px rgb(71, 71, 71);
   margin: 10px;
   display: flex;
@@ -134,25 +136,30 @@ select {
   justify-content: space-around;
   background: rgb(105, 123, 168);
   align-items: center;
-  font-size: large;
+  font-size:medium;
 }
 .box {
   display: flex;
   box-shadow: 3px 3px 6px #383838;
+  padding: 50px;
   margin : 20px;
   background-color: white;
   width: 800px;
   font-size: 18px;
-  border-radius: 40px;
+  border-radius: 15px;
 }
   
 .oneimage {
-  box-shadow:3px 3px 6px #383838 ;
-  justify-content: center;
-  align-items: center;
-  width:  500px;
-  height: 500px;
-  object-fit: cover;
+  display: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .delete {

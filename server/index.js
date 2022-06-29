@@ -13,13 +13,16 @@ app.use(cors())
 let port = 5000;
 
 app.post('/api',(req,res)=>{
-    mongoo.saveRecipe(req.body)
-    res.send()
+    mongoo.saveRecipe(req.body).then(data =>{
+        res.send(data)
+    })
 })
 
 app.delete('/api/:id',(req,res)=>{
     mongoo.deleteRecipe(req.params.id).then(data => {res.send(data)})
 })
+
+
 
 app.get('/api/:term',(req,res)=>{
     mongoo.searchRecipe(req.params).then(data=>{
