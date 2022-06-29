@@ -5,6 +5,7 @@ import Add from './components/Add'
 import Search from './components/Search';
 import axios from 'axios'
 import OneRecipe from './components/OneRecipe';
+import Update from './components/Update';
 
 class App extends React.Component {
   constructor(props){
@@ -13,13 +14,16 @@ class App extends React.Component {
       recipe:[],
       oneRecipe:{},
       view:'allRecipes',
-      success:''
+      success:'',
+      currentID:''
     }
     this.renderView = this.renderView.bind(this);
     this.handleview = this.handleview.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this)
     this.selectOne = this.selectOne.bind(this);
     this.deleteOne = this.deleteOne.bind(this);
+    this.updateOne = this.updateOne.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
 
@@ -30,7 +34,6 @@ class App extends React.Component {
     fetch("http://localhost:5000/api").then(response =>
       response.json()
     ).then(data =>{
-      console.log(data)
       this.setState({
         recipe:data
       })
@@ -48,7 +51,11 @@ selectOne(index){
 }
 
 deleteOne(index){
-  axios.post(("http://localhost:5000/api/d"),this.state.recipe[index])
+  axios.delete(`http://localhost:5000/api/${this.state.recipe[index]._id}`).then(response =>{
+    this.setState({
+      recipe:response.data
+    })
+  })
 }
 
 
@@ -67,30 +74,63 @@ handleSearch(term){
       axios.post("http://localhost:5000/api",{
         name: input.target.name.value,
         recipe: input.target.recipe.value,
-        image: input.target.image.value
-      }).then(data =>{
+        image: input.target.image.value,
+        sort:input.target.sort.value
+      }).then(response =>{
         this.setState({
-          success:'success'
+          success:'success',
+          recipe:response.data
         })
       })
   }
 
+updateOne(index){
+  this.setState({
+  view:'update',
+  currentID:this.state.recipe[index]._id
+  })
 
+}
 
   handleview(view){
     this.setState({
       view: view
     })
   }
+
+  handleUpdate(input){
+    input.preventDefault()
+    let data ={
+      name:input.target.name.value,
+      recipe: input.target.recipe.value,
+      image: input.target.image.value,
+      sort:input.target.sort.value
+    }
+    axios.put(`http://localhost:5000/api/${this.state.currentID}`,data).then(response=>{
+      this.setState({
+        recipe:response.data
+      })
+    })
+  }
+
   renderView(){
     if(this.state.view === 'allRecipes'){
-     return <Recipes recipes = {this.state.recipe}  selectOne={this.selectOne} deleteOne={this.deleteOne} />
+     return <Recipes recipes = {this.state.recipe}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} />
     }else if(this.state.view ==='add'){
       return  <Add handleSubmit={this.handleSubmit} success={this.state.success === "success"? "Data Saved" : ''} /> 
+    }else if(this.state.view ==='update'){
+      return <Update handleUpdate={this.handleUpdate} />
     }else if(this.state.view ==='oneRecipe'){
       return <center><OneRecipe recipe={this.state.oneRecipe}/></center>
+    }else if(this.state.view ==='breakfast'){
+      return <Recipes recipes = {this.state.recipe.filter(element => element.sort ==='breakfast' )}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne}/>
+    }else if(this.state.view ==='lunch'){
+      return <Recipes recipes = {this.state.recipe.filter(element => element.sort ==='lunch')}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne}/>
+    }else if(this.state.view ==='dinner'){
+      return <Recipes recipes = {this.state.recipe.filter(element => element.sort ==='dinner')}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne} />
+    }else if(this.state.view ==='desert'){
+      return <Recipes recipes = {this.state.recipe.filter(element => element.sort ==='desert')}  selectOne={this.selectOne} deleteOne={this.deleteOne} update={this.updateOne}/>
     }
-    
   }
 
   render(){
@@ -113,6 +153,41 @@ handleSearch(term){
             this.handleview('allRecipes')
           }}
           >Recipes</div>
+            <div className={
+            this.state.view !=='breakfast' ?
+            "nav-unselected" : "nav-selected"
+          }
+          onClick={()=>{
+            this.handleview('breakfast')
+          }}
+          >Breakfast</div>
+            <div className={
+            this.state.view !=='lunch' ?
+            "nav-unselected" : "nav-selected"
+          }
+          onClick={()=>{
+            this.handleview('lunch')
+          }}
+          >Lunch</div>
+            <div className={
+            this.state.view !=='dinner' ?
+            "nav-unselected" : "nav-selected"
+          }
+          onClick={()=>{
+            this.handleview('dinner')
+          }}
+          >Dinner</div>
+            <div className={
+            this.state.view !=='desert' ?
+            "nav-unselected" : "nav-selected"
+          }
+          onClick={()=>{
+            this.handleview('desert')
+          }}
+          >Deserts</div>
+
+
+          
           <div className={
             this.state.view !=='search' ?
             "nav-unselected" : "nav-selected"

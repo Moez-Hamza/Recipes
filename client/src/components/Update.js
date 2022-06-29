@@ -1,12 +1,12 @@
 import React from "react";
 
-class Add extends React.Component{
+class Update extends React.Component{
     constructor(props){
         super(props);
         this.state={
             name:'',
             recipe:'',
-            image:''
+            image:'',
         }
        this.handleChange = this.handleChange.bind(this)
     }
@@ -19,9 +19,9 @@ class Add extends React.Component{
     render(){
         return(<center>
         <div>
-            <center><h2 className="title">Add a recipe</h2></center>
+            <center><h2 className="title">Update a recipe</h2></center>
             <div className="container">
-            <form className="New-Recipe-Form" onSubmit={this.props.handleSubmit}>
+            <form className="New-Recipe-Form" onSubmit={this.props.handleUpdate}>
                 <label className="text-form" >Recipe name:
                 <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required /><br></br>
                 </label><br></br>
@@ -39,7 +39,7 @@ class Add extends React.Component{
         <option value='desert'> Desert</option>
         </select>
                 <input type="submit" className="btn-submit" value='Submit'/> 
-                <div className="success">{this.props.success}</div>
+
             </form>
             </div>
         </div></center>
@@ -48,4 +48,4 @@ class Add extends React.Component{
     }
 
 }
-export default Add
+export default Update
